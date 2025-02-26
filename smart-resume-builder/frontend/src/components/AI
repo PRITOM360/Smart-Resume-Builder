@@ -1,0 +1,36 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const AIResumeGenerator = () => {
+    const [jobDescription, setJobDescription] = useState('');
+    const [generatedContent, setGeneratedContent] = useState('');
+
+    const handleGenerateContent = async () => {
+        try {
+            const response = await axios.post('/api/ai/generate-content', { jobDescription });
+            setGeneratedContent(response.data.content);
+        } catch (error) {
+            console.error('Error generating content:', error);
+        }
+    };
+
+    return (
+        <div className="ai-resume-generator">
+            <h2>AI-Powered Resume Content Generator</h2>
+            <textarea
+                placeholder="Enter job description..."
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+            />
+            <button onClick={handleGenerateContent}>Generate Content</button>
+            {generatedContent && (
+                <div className="generated-content">
+                    <h3>Generated Content:</h3>
+                    <p>{generatedContent}</p>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default AIResumeGenerator;

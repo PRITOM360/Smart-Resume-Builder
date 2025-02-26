@@ -1,0 +1,66 @@
+import React, { useState } from 'react';
+
+const ResumeBuilder = () => {
+    const [resumeSections, setResumeSections] = useState({
+        education: '',
+        workExperience: '',
+        skills: '',
+        bio: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setResumeSections({
+            ...resumeSections,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Logic to save the resume sections
+    };
+
+    return (
+        <div className="resume-builder">
+            <h1>Resume Builder</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Bio:</label>
+                    <textarea
+                        name="bio"
+                        value={resumeSections.bio}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Education:</label>
+                    <textarea
+                        name="education"
+                        value={resumeSections.education}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Work Experience:</label>
+                    <textarea
+                        name="workExperience"
+                        value={resumeSections.workExperience}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Skills:</label>
+                    <textarea
+                        name="skills"
+                        value={resumeSections.skills}
+                        onChange={handleChange}
+                    />
+                </div>
+                <button type="submit">Save Resume</button>
+            </form>
+        </div>
+    );
+};
+
+export default ResumeBuilder;
